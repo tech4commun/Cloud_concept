@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux Networking Commands</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; color: #1a1a1a; background: #fff; }
+  .page { padding: 1.5rem 1rem; max-width: 680px; margin: auto; }
+  .hero { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid #ddd; }
+  .badge { display: inline-block; background: #E6F1FB; color: #185FA5; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-bottom: 0.75rem; }
+  .hero h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.4rem; }
+  .hero p { font-size: 14px; color: #666; line-height: 1.6; }
+  .section { margin-bottom: 1.75rem; }
+  .section-label { font-size: 11px; font-weight: 500; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .cmd-card { background: #f9f9f9; border: 0.5px solid #ddd; border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden; }
+  .cmd-header { display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem 0; }
+  .cmd-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .i-blue   { background: #E6F1FB; color: #185FA5; }
+  .i-teal   { background: #E1F5EE; color: #0F6E56; }
+  .i-purple { background: #EEEDFE; color: #534AB7; }
+  .i-amber  { background: #FAEEDA; color: #854F0B; }
+  .i-green  { background: #EAF3DE; color: #3B6D11; }
+  .i-red    { background: #FCEBEB; color: #A32D2D; }
+  .i-coral  { background: #FAECE7; color: #993C1D; }
+  .cmd-title { font-size: 14px; font-weight: 500; }
+  .cmd-desc  { font-size: 12px; color: #666; margin-top: 1px; }
+  .cmd-body  { padding: 0.6rem 1rem 0.9rem; }
+  .code-block { background: #fff; border: 0.5px solid #ccc; border-radius: 8px; padding: 0.6rem 0.85rem; margin-top: 0.5rem; font-family: monospace; font-size: 13px; color: #185FA5; line-height: 1.85; }
+  .note { font-size: 12px; color: #999; margin-top: 0.5rem; line-height: 1.5; }
+  .note span { color: #0F6E56; font-weight: 500; }
+  .note span.aws { color: #854F0B; font-weight: 500; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .tip-box { border-radius: 10px; padding: 0.75rem 1rem; display: flex; gap: 10px; align-items: flex-start; margin-top: 0.5rem; }
+  .tip-blue  { background: #E6F1FB; border: 0.5px solid #B5D4F4; }
+  .tip-amber { background: #FAEEDA; border: 0.5px solid #FAC775; }
+  .tip-teal  { background: #E1F5EE; border: 0.5px solid #9FE1CB; }
+  .tip-box i { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+  .tip-blue i  { color: #185FA5; }
+  .tip-amber i { color: #854F0B; }
+  .tip-teal i  { color: #0F6E56; }
+  .tip-blue p  { font-size: 12px; color: #185FA5; line-height: 1.55; }
+  .tip-amber p { font-size: 12px; color: #854F0B; line-height: 1.55; }
+  .tip-teal p  { font-size: 12px; color: #0F6E56; line-height: 1.55; }
+  .divider { height: 0.5px; background: #ddd; margin: 1.75rem 0; }
+  @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="badge">Linux · Networking Commands</div>
+    <h1>Networking commands</h1>
+    <p>Check IPs, test connectivity, monitor ports, transfer files, and debug network issues — all essential for Linux and AWS EC2 work.</p>
+  </div>
+
+  <!-- 1. Check IP -->
+  <div class="section">
+    <div class="section-label">1 · Check IP address</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-blue"><i class="ti ti-network"></i></div>
+        <div><div class="cmd-title">ip addr — show all IP addresses</div><div class="cmd-desc">Modern command — shows all network interfaces and their IPs</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">ip addr<br>ip addr show eth0</div>
+        <div class="note"><span>Look for:</span> <code style="font-family:monospace">inet</code> = IPv4 address &nbsp;|&nbsp; <code style="font-family:monospace">inet6</code> = IPv6 address</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-blue"><i class="ti ti-router"></i></div>
+          <div><div class="cmd-title">ifconfig</div><div class="cmd-desc">Older command, still common</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">ifconfig<br>ifconfig eth0</div>
+          <div class="note"><span>Install:</span> <code style="font-family:monospace">sudo apt install net-tools</code></div>
+        </div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-blue"><i class="ti ti-world"></i></div>
+          <div><div class="cmd-title">Public IP</div><div class="cmd-desc">Your external/public IP address</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">curl ifconfig.me<br>curl icanhazip.com</div>
+          <div class="note"><span class="aws">AWS EC2:</span> Useful to find your instance's public IP.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. Test Connectivity -->
+  <div class="section">
+    <div class="section-label">2 · Test connectivity</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-teal"><i class="ti ti-radar"></i></div>
+        <div><div class="cmd-title">ping — test if host is reachable</div><div class="cmd-desc">Sends packets and measures response time</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">ping google.com<br>ping -c 4 google.com</div>
+        <div class="note"><span>Flag:</span> <code style="font-family:monospace">-c 4</code> = send only 4 packets then stop. Without it, runs forever — stop with <code style="font-family:monospace">Ctrl+C</code></div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-teal"><i class="ti ti-route"></i></div>
+        <div><div class="cmd-title">traceroute — trace path to host</div><div class="cmd-desc">Shows every hop/router the packet passes through</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">traceroute google.com<br>tracepath google.com</div>
+        <div class="note"><span>Install:</span> <code style="font-family:monospace">sudo apt install traceroute</code> &nbsp;|&nbsp; <code style="font-family:monospace">tracepath</code> is built-in alternative</div>
+      </div>
+    </div>
+
+    <div class="tip-box tip-blue">
+      <i class="ti ti-info-circle"></i>
+      <p>On AWS EC2, if <code style="font-family:monospace">ping</code> fails to reach your instance, check your Security Group inbound rules — ICMP traffic must be allowed.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. DNS Lookup -->
+  <div class="section">
+    <div class="section-label">3 · DNS lookup</div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-purple"><i class="ti ti-dns"></i></div>
+          <div><div class="cmd-title">nslookup</div><div class="cmd-desc">Query DNS for a domain</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">nslookup google.com</div>
+          <div class="note"><span>Shows:</span> IP address and DNS server used</div>
+        </div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-purple"><i class="ti ti-search"></i></div>
+          <div><div class="cmd-title">dig</div><div class="cmd-desc">Detailed DNS information</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">dig google.com<br>dig google.com A</div>
+          <div class="note"><span>Install:</span> <code style="font-family:monospace">sudo apt install dnsutils</code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-purple"><i class="ti ti-arrow-right-circle"></i></div>
+        <div><div class="cmd-title">host — quick DNS resolve</div><div class="cmd-desc">Simplest way to resolve a domain to IP</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">host google.com</div>
+        <div class="note"><span>Output:</span> google.com has address 142.250.x.x</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. Ports -->
+  <div class="section">
+    <div class="section-label">4 · Port and socket info</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-amber"><i class="ti ti-plug"></i></div>
+        <div><div class="cmd-title">ss — socket statistics</div><div class="cmd-desc">Modern replacement for netstat — shows open ports and connections</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">ss -tuln<br>ss -tulnp</div>
+        <div class="note"><span>Flags:</span> <code style="font-family:monospace">t</code> = TCP &nbsp;|&nbsp; <code style="font-family:monospace">u</code> = UDP &nbsp;|&nbsp; <code style="font-family:monospace">l</code> = listening &nbsp;|&nbsp; <code style="font-family:monospace">n</code> = numeric &nbsp;|&nbsp; <code style="font-family:monospace">p</code> = show process</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-amber"><i class="ti ti-list"></i></div>
+          <div><div class="cmd-title">netstat</div><div class="cmd-desc">Older but widely used</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">netstat -tuln<br>netstat -tulnp</div>
+          <div class="note"><span>Install:</span> <code style="font-family:monospace">sudo apt install net-tools</code></div>
+        </div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-amber"><i class="ti ti-door"></i></div>
+          <div><div class="cmd-title">Check specific port</div><div class="cmd-desc">Is port 80 open and listening?</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">ss -tuln | grep :80</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box tip-amber">
+      <i class="ti ti-alert-triangle"></i>
+      <p>On AWS EC2, even if a port is open on Linux, traffic won't reach it unless the Security Group has an inbound rule allowing that port.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. Download & Transfer -->
+  <div class="section">
+    <div class="section-label">5 · Download and transfer files</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-green"><i class="ti ti-download"></i></div>
+        <div><div class="cmd-title">curl — transfer data from URL</div><div class="cmd-desc">Download files, call APIs, test HTTP endpoints</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">curl https://example.com<br>curl -O https://example.com/file.zip<br>curl -I https://example.com</div>
+        <div class="note"><span>Flags:</span> <code style="font-family:monospace">-O</code> = save file &nbsp;|&nbsp; <code style="font-family:monospace">-I</code> = headers only &nbsp;|&nbsp; <code style="font-family:monospace">-X POST</code> = HTTP method</div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-green"><i class="ti ti-cloud-download"></i></div>
+        <div><div class="cmd-title">wget — download files</div><div class="cmd-desc">Best for large files — supports resume</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">wget https://example.com/file.zip<br>wget -c https://example.com/file.zip</div>
+        <div class="note"><span>Flag:</span> <code style="font-family:monospace">-c</code> = resume interrupted download</div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-green"><i class="ti ti-upload"></i></div>
+        <div><div class="cmd-title">scp — secure copy over SSH</div><div class="cmd-desc">Transfer files to/from a remote server or EC2 instance</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">scp file.txt user@server:/home/user/<br>scp -i key.pem file.txt ubuntu@ec2-ip:/home/ubuntu/</div>
+        <div class="note"><span class="aws">AWS EC2:</span> Use <code style="font-family:monospace">-i key.pem</code> flag with your key pair to authenticate.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. SSH -->
+  <div class="section">
+    <div class="section-label">6 · SSH — connect to remote server</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-coral"><i class="ti ti-terminal"></i></div>
+        <div><div class="cmd-title">ssh — secure shell connection</div><div class="cmd-desc">Log into remote Linux machines securely over the network</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">ssh user@hostname<br>ssh ubuntu@192.168.1.10<br>ssh -i key.pem ubuntu@ec2-public-ip</div>
+        <div class="note"><span class="aws">AWS EC2:</span> Default user is <code style="font-family:monospace">ubuntu</code> (Ubuntu) or <code style="font-family:monospace">ec2-user</code> (Amazon Linux)</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-coral"><i class="ti ti-lock"></i></div>
+          <div><div class="cmd-title">SSH with port</div><div class="cmd-desc">Connect on a custom port</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">ssh -p 2222 user@host</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-coral"><i class="ti ti-key"></i></div>
+          <div><div class="cmd-title">SSH with verbose</div><div class="cmd-desc">Debug connection issues</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">ssh -v user@host</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. Network Monitoring -->
+  <div class="section">
+    <div class="section-label">7 · Network monitoring</div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-red"><i class="ti ti-activity"></i></div>
+          <div><div class="cmd-title">nload</div><div class="cmd-desc">Real-time bandwidth monitor</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">sudo apt install nload<br>nload</div>
+        </div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-red"><i class="ti ti-chart-line"></i></div>
+          <div><div class="cmd-title">iftop</div><div class="cmd-desc">Live per-connection bandwidth</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">sudo apt install iftop<br>sudo iftop</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-red"><i class="ti ti-eye"></i></div>
+        <div><div class="cmd-title">netstat -s — network statistics summary</div><div class="cmd-desc">Total packets sent, received, errors by protocol</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">netstat -s</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 8. Routing Table -->
+  <div class="section">
+    <div class="section-label">8 · Routing table</div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-blue"><i class="ti ti-map"></i></div>
+          <div><div class="cmd-title">ip route</div><div class="cmd-desc">View routing table (modern)</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">ip route<br>ip route show</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-blue"><i class="ti ti-map-2"></i></div>
+          <div><div class="cmd-title">route</div><div class="cmd-desc">View routing table (older)</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">route -n</div>
+          <div class="note"><span>Flag:</span> <code style="font-family:monospace">-n</code> = show numeric IPs (faster)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box tip-teal">
+      <i class="ti ti-info-circle"></i>
+      <p>On AWS EC2, the routing table is managed by the VPC. Use <code style="font-family:monospace">ip route</code> to see the default gateway — usually the first IP in your subnet (e.g. 172.31.0.1).</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Cheatsheet -->
+  <div class="section">
+    <div class="section-label">Quick reference cheatsheet</div>
+    <div class="cmd-card">
+      <div class="cmd-body" style="padding-top:0.9rem">
+        <div class="code-block" style="line-height:2.1">
+ip addr &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# show IP addresses<br>
+curl ifconfig.me &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# public IP<br>
+ping -c 4 google.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# test connectivity<br>
+traceroute google.com &nbsp;&nbsp;&nbsp;&nbsp;# trace network path<br>
+nslookup google.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# DNS lookup<br>
+dig google.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# detailed DNS info<br>
+ss -tuln &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# open ports<br>
+ss -tuln | grep :80 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# check specific port<br>
+curl -O &lt;url&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download file<br>
+wget &lt;url&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# download file<br>
+scp -i key.pem f user@ip:/ # copy to EC2<br>
+ssh -i key.pem ubuntu@ip &nbsp;# connect to EC2<br>
+ip route &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# routing table
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
