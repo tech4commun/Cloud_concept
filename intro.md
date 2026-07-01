@@ -9,13 +9,13 @@
 
 
 ### 1. Introduction to Cloud Computing (0:00 - 11:35)
-The video provides a foundational exploration of **Cloud Computing** and the **Software Development Lifecycle (SDLC)**, focusing on how developers transition from writing code to deploying it for global access (0:00 - 1:23).
+The video provides a foundational exploration of **Cloud Computing** and the **Software Development Lifecycle (SDLC)**, focusing on how developers transition from writing code to deploying it for global access .
 
 ### Core Concepts of Software Development
 *   **Writing the Code (0:32 - 1:08):** Development is categorized by the application's nature:
     *   **Static Applications:** Built using *HTML*, *CSS*, and *JavaScript*.
     *   **Dynamic Applications:** Utilize a backend framework (e.g., *Java Spring Boot*, *Python Django*, *Node.js*) and a database for interactive user responses.
-*   **Giving Life to Code:** The process of **Deployment** and **Maintenance**. While local hosting (localhost) is suitable for development, cloud infrastructure is required to make applications accessible to the world (1:13 - 1:35).
+*   **Giving Life to Code:** The process of **Deployment** and **Maintenance**. While local hosting (localhost) is suitable for development, cloud infrastructure is required to make applications accessible to the world .
 
 ### The Shift: On-Premises vs. Cloud
 To understand the necessity of the cloud, the instructor contrasts it with traditional infrastructure (3:05 - 6:04):
