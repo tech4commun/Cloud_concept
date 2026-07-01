@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux Process Management Commands</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; color: #1a1a1a; background: #fff; }
+  .page { padding: 1.5rem 1rem; max-width: 680px; margin: auto; }
+  .hero { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid #ddd; }
+  .badge { display: inline-block; background: #EEEDFE; color: #534AB7; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-bottom: 0.75rem; }
+  .hero h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.4rem; }
+  .hero p { font-size: 14px; color: #666; line-height: 1.6; }
+  .section { margin-bottom: 1.75rem; }
+  .section-label { font-size: 11px; font-weight: 500; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .cmd-card { background: #f9f9f9; border: 0.5px solid #ddd; border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden; }
+  .cmd-header { display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem 0; }
+  .cmd-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .i-purple { background: #EEEDFE; color: #534AB7; }
+  .i-blue   { background: #E6F1FB; color: #185FA5; }
+  .i-red    { background: #FCEBEB; color: #A32D2D; }
+  .i-amber  { background: #FAEEDA; color: #854F0B; }
+  .i-teal   { background: #E1F5EE; color: #0F6E56; }
+  .i-green  { background: #EAF3DE; color: #3B6D11; }
+  .i-coral  { background: #FAECE7; color: #993C1D; }
+  .cmd-title { font-size: 14px; font-weight: 500; }
+  .cmd-desc  { font-size: 12px; color: #666; margin-top: 1px; }
+  .cmd-body  { padding: 0.6rem 1rem 0.9rem; }
+  .code-block { background: #fff; border: 0.5px solid #ccc; border-radius: 8px; padding: 0.6rem 0.85rem; margin-top: 0.5rem; font-family: monospace; font-size: 13px; color: #185FA5; line-height: 1.8; }
+  .note { font-size: 12px; color: #999; margin-top: 0.5rem; line-height: 1.5; }
+  .note span { color: #0F6E56; font-weight: 500; }
+  .note span.warn { color: #A32D2D; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .tip-box { border-radius: 10px; padding: 0.75rem 1rem; display: flex; gap: 10px; align-items: flex-start; margin-top: 0.5rem; }
+  .tip-blue { background: #E6F1FB; border: 0.5px solid #B5D4F4; }
+  .tip-red  { background: #FCEBEB; border: 0.5px solid #F7C1C1; }
+  .tip-box i { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+  .tip-blue i { color: #185FA5; }
+  .tip-red  i { color: #A32D2D; }
+  .tip-blue p { font-size: 12px; color: #185FA5; line-height: 1.55; }
+  .tip-red  p { font-size: 12px; color: #A32D2D; line-height: 1.55; }
+  .signal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  .signal-pill { background: #f9f9f9; border: 0.5px solid #ddd; border-radius: 8px; padding: 0.5rem 0.75rem; }
+  .sig-num  { font-family: monospace; font-size: 12px; color: #185FA5; font-weight: 500; }
+  .sig-name { font-family: monospace; font-size: 11px; color: #666; margin-top: 1px; }
+  .sig-desc { font-size: 11px; color: #999; margin-top: 2px; }
+  .divider { height: 0.5px; background: #ddd; margin: 1.75rem 0; }
+  @media (max-width: 480px) { .two-col, .signal-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="badge">Linux · Process Management</div>
+    <h1>Process management commands</h1>
+    <p>View, monitor, control, and kill processes on Linux — essential for managing running programs on your system or AWS EC2 instance.</p>
+  </div>
+
+  <!-- 1. View Processes -->
+  <div class="section">
+    <div class="section-label">1 · View processes</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-purple"><i class="ti ti-list-details"></i></div>
+        <div><div class="cmd-title">Snapshot of all running processes</div><div class="cmd-desc">Most commonly used — shows PID, user, CPU, memory, command</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">ps aux</div>
+        <div class="note"><span>Flags:</span> <code style="font-family:monospace">a</code> = all users &nbsp;|&nbsp; <code style="font-family:monospace">u</code> = user-readable format &nbsp;|&nbsp; <code style="font-family:monospace">x</code> = include background processes</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-purple"><i class="ti ti-user"></i></div>
+          <div><div class="cmd-title">Your processes only</div><div class="cmd-desc">Processes by current user</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">ps -u $USER</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-purple"><i class="ti ti-filter"></i></div>
+          <div><div class="cmd-title">Filter by name</div><div class="cmd-desc">Find a specific process</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">ps aux | grep nginx</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. Real-time Monitoring -->
+  <div class="section">
+    <div class="section-label">2 · Real-time monitoring</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-blue"><i class="ti ti-chart-bar"></i></div>
+        <div><div class="cmd-title">top — live process viewer</div><div class="cmd-desc">Refreshes every 3 seconds — shows CPU, memory usage in real time</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">top</div>
+        <div class="note"><span>Inside top:</span> press <code style="font-family:monospace">q</code> to quit &nbsp;|&nbsp; <code style="font-family:monospace">k</code> to kill &nbsp;|&nbsp; <code style="font-family:monospace">M</code> sort by memory &nbsp;|&nbsp; <code style="font-family:monospace">P</code> sort by CPU</div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-blue"><i class="ti ti-device-analytics"></i></div>
+        <div><div class="cmd-title">htop — better interactive viewer</div><div class="cmd-desc">Color UI, mouse support, easier to use than top (install first)</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">sudo apt install htop -y<br>htop</div>
+        <div class="note"><span>Tip:</span> On AWS EC2 Amazon Linux — <code style="font-family:monospace">sudo yum install htop</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. Find PID -->
+  <div class="section">
+    <div class="section-label">3 · Find process ID (PID)</div>
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-teal"><i class="ti ti-search"></i></div>
+          <div><div class="cmd-title">pgrep</div><div class="cmd-desc">Returns PID by process name</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">pgrep nginx</div>
+          <div class="note"><span>Example output:</span> 1234</div>
+        </div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-teal"><i class="ti ti-id-badge"></i></div>
+          <div><div class="cmd-title">pidof</div><div class="cmd-desc">Returns PID of exact program name</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">pidof nginx</div>
+          <div class="note"><span>Difference:</span> pgrep = partial match, pidof = exact name.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. Kill Processes -->
+  <div class="section">
+    <div class="section-label">4 · Kill / stop processes</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-red"><i class="ti ti-x"></i></div>
+        <div><div class="cmd-title">kill — stop by PID</div><div class="cmd-desc">Sends a signal to a process using its PID</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">kill 1234<br>kill -9 1234</div>
+        <div class="note"><span>Note:</span> Default is SIGTERM (graceful). <code style="font-family:monospace">-9</code> is SIGKILL (force — no cleanup).</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-red"><i class="ti ti-trash"></i></div>
+          <div><div class="cmd-title">killall</div><div class="cmd-desc">Kill all processes by name</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">killall nginx</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-red"><i class="ti ti-bolt-off"></i></div>
+          <div><div class="cmd-title">pkill</div><div class="cmd-desc">Kill by partial name match</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">pkill -f nginx</div></div>
+      </div>
+    </div>
+
+    <div class="tip-box tip-red">
+      <i class="ti ti-alert-triangle"></i>
+      <p><code style="font-family:monospace">kill -9</code> is a last resort — the process cannot save data or clean up. Always try <code style="font-family:monospace">kill &lt;PID&gt;</code> first and only use <code style="font-family:monospace">-9</code> if it doesn't respond.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. Signals -->
+  <div class="section">
+    <div class="section-label">5 · Common kill signals</div>
+    <div class="signal-grid">
+      <div class="signal-pill"><div class="sig-num">kill -1</div><div class="sig-name">SIGHUP</div><div class="sig-desc">Reload config without restart</div></div>
+      <div class="signal-pill"><div class="sig-num">kill -2</div><div class="sig-name">SIGINT</div><div class="sig-desc">Same as Ctrl+C interrupt</div></div>
+      <div class="signal-pill"><div class="sig-num">kill -9</div><div class="sig-name">SIGKILL</div><div class="sig-desc">Force kill — no cleanup</div></div>
+      <div class="signal-pill"><div class="sig-num">kill -15</div><div class="sig-name">SIGTERM</div><div class="sig-desc">Graceful stop (default)</div></div>
+      <div class="signal-pill"><div class="sig-num">kill -19</div><div class="sig-name">SIGSTOP</div><div class="sig-desc">Pause/suspend process</div></div>
+      <div class="signal-pill"><div class="sig-num">kill -18</div><div class="sig-name">SIGCONT</div><div class="sig-desc">Resume a stopped process</div></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. Background & Foreground -->
+  <div class="section">
+    <div class="section-label">6 · Background and foreground</div>
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-green"><i class="ti ti-player-play"></i></div>
+          <div><div class="cmd-title">Run in background</div><div class="cmd-desc">Append &amp; to any command</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">python3 app.py &amp;</div>
+          <div class="note"><span>Output:</span> [1] 5678 — job number and PID</div>
+        </div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-green"><i class="ti ti-list"></i></div>
+          <div><div class="cmd-title">List background jobs</div><div class="cmd-desc">See all jobs in current session</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">jobs</div></div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-amber"><i class="ti ti-arrow-back-up"></i></div>
+          <div><div class="cmd-title">Bring to foreground</div><div class="cmd-desc">Resume background job in terminal</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">fg %1</div>
+          <div class="note"><span>Note:</span> %1 = job number from jobs list</div>
+        </div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon i-amber"><i class="ti ti-player-pause"></i></div>
+          <div><div class="cmd-title">Suspend to background</div><div class="cmd-desc">Pause a running foreground process</div></div>
+        </div>
+        <div class="cmd-body">
+          <div class="code-block">Ctrl + Z</div>
+          <div class="note">Then run <code style="font-family:monospace">bg</code> to resume in background.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. nohup -->
+  <div class="section">
+    <div class="section-label">7 · Keep process alive after logout</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon i-coral"><i class="ti ti-plug"></i></div>
+        <div><div class="cmd-title">nohup — no hangup</div><div class="cmd-desc">Keeps process running even after you log out of the SSH session</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">nohup python3 app.py &amp;</div>
+        <div class="note"><span>Output saved to:</span> nohup.out by default in current directory.</div>
+      </div>
+    </div>
+
+    <div class="tip-box tip-blue">
+      <i class="ti ti-info-circle"></i>
+      <p>On AWS EC2, use <code style="font-family:monospace">nohup</code> when running scripts over SSH so they don't stop when your connection drops. For long-term services, use <code style="font-family:monospace">systemd</code> or <code style="font-family:monospace">screen</code>/<code style="font-family:monospace">tmux</code> instead.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Cheatsheet -->
+  <div class="section">
+    <div class="section-label">Quick reference cheatsheet</div>
+    <div class="cmd-card">
+      <div class="cmd-body" style="padding-top:0.9rem">
+        <div class="code-block" style="line-height:2.1">
+ps aux &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# all running processes<br>
+ps aux | grep nginx &nbsp;&nbsp;&nbsp;# find specific process<br>
+top &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# live monitor (q to quit)<br>
+htop &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# better live monitor<br>
+pgrep nginx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# find PID by name<br>
+kill 1234 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# graceful stop<br>
+kill -9 1234 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# force kill<br>
+killall nginx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# kill all by name<br>
+python3 app.py &amp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# run in background<br>
+jobs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# list background jobs<br>
+fg %1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# bring job to foreground<br>
+nohup python3 app.py &amp; # keep alive after logout
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
