@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ubuntu Package Commands</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; color: #1a1a1a; background: #fff; }
+  .page { padding: 1.5rem 1rem; max-width: 680px; margin: auto; }
+  .hero { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid #ddd; }
+  .badge { display: inline-block; background: #E1F5EE; color: #0F6E56; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-bottom: 0.75rem; }
+  .hero h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.4rem; }
+  .hero p { font-size: 14px; color: #666; line-height: 1.6; }
+  .section { margin-bottom: 1.75rem; }
+  .section-label { font-size: 11px; font-weight: 500; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .cmd-card { background: #f9f9f9; border: 0.5px solid #ddd; border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden; }
+  .cmd-header { display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem 0; }
+  .cmd-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .icon-green { background: #EAF3DE; color: #3B6D11; }
+  .icon-blue  { background: #E6F1FB; color: #185FA5; }
+  .icon-amber { background: #FAEEDA; color: #854F0B; }
+  .icon-red   { background: #FCEBEB; color: #A32D2D; }
+  .icon-purple{ background: #EEEDFE; color: #534AB7; }
+  .icon-teal  { background: #E1F5EE; color: #0F6E56; }
+  .cmd-title { font-size: 14px; font-weight: 500; }
+  .cmd-desc  { font-size: 12px; color: #666; margin-top: 1px; }
+  .cmd-body  { padding: 0.6rem 1rem 0.9rem; }
+  .code-block { background: #fff; border: 0.5px solid #ccc; border-radius: 8px; padding: 0.6rem 0.85rem; margin-top: 0.5rem; font-family: monospace; font-size: 13px; color: #185FA5; line-height: 1.7; }
+  .note { font-size: 12px; color: #999; margin-top: 0.5rem; line-height: 1.5; }
+  .note span { color: #0F6E56; font-weight: 500; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .tip-box { background: #E6F1FB; border: 0.5px solid #B5D4F4; border-radius: 10px; padding: 0.75rem 1rem; display: flex; gap: 10px; align-items: flex-start; margin-top: 0.5rem; }
+  .tip-box i { color: #185FA5; font-size: 16px; margin-top: 1px; }
+  .tip-box p  { font-size: 12px; color: #185FA5; line-height: 1.55; }
+  .divider { height: 0.5px; background: #ddd; margin: 1.75rem 0; }
+  @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="badge">Ubuntu · APT Package Manager</div>
+    <h1>Package installation commands</h1>
+    <p>All essential commands for managing software on Ubuntu using <code style="font-family:monospace;font-size:13px;background:#f1f1f1;padding:1px 6px;border-radius:4px;">apt</code> — the default package manager.</p>
+  </div>
+
+  <!-- 1. Update & Upgrade -->
+  <div class="section">
+    <div class="section-label">1 · Update &amp; upgrade</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon icon-green"><i class="ti ti-refresh"></i></div>
+        <div><div class="cmd-title">Update package list</div><div class="cmd-desc">Fetches latest info from servers — always run this first</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">sudo apt update</div>
+        <div class="note"><span>Note:</span> This does not install anything — it only refreshes the list of available packages.</div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon icon-green"><i class="ti ti-arrow-up"></i></div>
+        <div><div class="cmd-title">Upgrade installed packages</div><div class="cmd-desc">Installs newer versions of all installed packages</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">sudo apt upgrade</div>
+        <div class="note"><span>Tip:</span> Combine both — <code style="font-family:monospace">sudo apt update && sudo apt upgrade</code></div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon icon-amber"><i class="ti ti-bolt"></i></div>
+        <div><div class="cmd-title">Full upgrade</div><div class="cmd-desc">Upgrades + handles dependency changes</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">sudo apt full-upgrade</div>
+        <div class="note"><span>Use when:</span> Regular upgrade skips a package due to dependency conflicts.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. Install -->
+  <div class="section">
+    <div class="section-label">2 · Install packages</div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon icon-blue"><i class="ti ti-download"></i></div>
+        <div><div class="cmd-title">Install a package</div><div class="cmd-desc">Downloads and installs the specified package</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">sudo apt install &lt;package-name&gt;</div>
+        <div class="note">Example: <code style="font-family:monospace">sudo apt install nginx</code></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-blue"><i class="ti ti-stack"></i></div>
+          <div><div class="cmd-title">Install multiple</div><div class="cmd-desc">Space-separated list</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">sudo apt install git curl wget</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-blue"><i class="ti ti-check"></i></div>
+          <div><div class="cmd-title">Skip confirmation</div><div class="cmd-desc">Auto-yes to all prompts</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">sudo apt install -y nginx</div></div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <i class="ti ti-info-circle"></i>
+      <p><strong>On AWS EC2 (Amazon Linux):</strong> Use <code style="font-family:monospace">yum</code> instead — e.g. <code style="font-family:monospace">sudo yum install nginx</code>. Ubuntu-based EC2s still use <code style="font-family:monospace">apt</code>.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. Remove -->
+  <div class="section">
+    <div class="section-label">3 · Remove packages</div>
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-red"><i class="ti ti-trash"></i></div>
+          <div><div class="cmd-title">Remove</div><div class="cmd-desc">Removes package, keeps config files</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">sudo apt remove &lt;pkg&gt;</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-red"><i class="ti ti-trash-x"></i></div>
+          <div><div class="cmd-title">Purge</div><div class="cmd-desc">Removes package + all config files</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">sudo apt purge &lt;pkg&gt;</div></div>
+      </div>
+    </div>
+
+    <div class="cmd-card">
+      <div class="cmd-header">
+        <div class="cmd-icon icon-red"><i class="ti ti-rotate-clockwise"></i></div>
+        <div><div class="cmd-title">Autoremove</div><div class="cmd-desc">Removes unused dependencies left behind</div></div>
+      </div>
+      <div class="cmd-body">
+        <div class="code-block">sudo apt autoremove</div>
+        <div class="note"><span>Best practice:</span> Run this after removing packages to keep the system clean.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. Search & Info -->
+  <div class="section">
+    <div class="section-label">4 · Search &amp; info</div>
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-teal"><i class="ti ti-search"></i></div>
+          <div><div class="cmd-title">Search package</div><div class="cmd-desc">Find by keyword</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">apt search &lt;keyword&gt;</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-teal"><i class="ti ti-file-info"></i></div>
+          <div><div class="cmd-title">Show info</div><div class="cmd-desc">Version, size, description</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">apt show &lt;package&gt;</div></div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-teal"><i class="ti ti-list"></i></div>
+          <div><div class="cmd-title">List installed</div><div class="cmd-desc">All installed packages</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">apt list --installed</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-teal"><i class="ti ti-arrow-up-circle"></i></div>
+          <div><div class="cmd-title">List upgradable</div><div class="cmd-desc">Packages with updates available</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">apt list --upgradable</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. Clean -->
+  <div class="section">
+    <div class="section-label">5 · Clean up cache</div>
+    <div class="two-col">
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-purple"><i class="ti ti-database-off"></i></div>
+          <div><div class="cmd-title">Clean cache</div><div class="cmd-desc">Deletes all cached .deb files</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">sudo apt clean</div></div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-header">
+          <div class="cmd-icon icon-purple"><i class="ti ti-eraser"></i></div>
+          <div><div class="cmd-title">Autoclean</div><div class="cmd-desc">Removes only outdated cached files</div></div>
+        </div>
+        <div class="cmd-body"><div class="code-block">sudo apt autoclean</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Cheatsheet -->
+  <div class="section">
+    <div class="section-label">Quick reference cheatsheet</div>
+    <div class="cmd-card">
+      <div class="cmd-body" style="padding-top:0.9rem">
+        <div class="code-block" style="line-height:2">
+          sudo apt update<br>
+          sudo apt upgrade<br>
+          sudo apt install &lt;pkg&gt;<br>
+          sudo apt install -y &lt;pkg&gt;<br>
+          sudo apt remove &lt;pkg&gt;<br>
+          sudo apt purge &lt;pkg&gt;<br>
+          sudo apt autoremove<br>
+          apt search &lt;keyword&gt;<br>
+          apt show &lt;pkg&gt;<br>
+          apt list --installed<br>
+          sudo apt clean
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
